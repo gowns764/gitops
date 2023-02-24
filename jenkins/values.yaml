@@ -829,18 +829,18 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass:
+  storageClass: jenkins-storage
   annotations: {}
   labels: {}
-  accessMode: "ReadWriteOnce"
-  size: "8Gi"
+  accessMode: "ReadWriteMany"
+  size: "10Gi"
   volumes:
   #  - name: nothing
   #    emptyDir: {}
   mounts:
-  #  - mountPath: /var/nothing
-  #    name: nothing
-  #    readOnly: true
+    - mountPath: /var/jenkins_home
+      name: jenkins-data
+  #readOnly: true
 
 networkPolicy:
   # Enable creation of NetworkPolicy resources.
