@@ -4,7 +4,6 @@ metadata:
   name: jenkins-pvc
   namespace: jenkins
 spec:
-  storageClassName: jenkins-sc
   accessModes:
     - ReadWriteMany
   resources:
