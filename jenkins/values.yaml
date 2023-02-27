@@ -840,11 +840,11 @@ persistence:
   labels: {}
   accessMode: "ReadWriteMany"
   size: "10Gi"
-  volumes:
-    - name: jenkins
-      nfs:
-        server: 192.168.56.1
-        path: /mnt/nfs_shared/jenkins
+  #volumes:
+  #  - name: jenkins
+  #    nfs:
+  #      server: 192.168.56.1
+  #      path: /mnt/nfs_shared/jenkins
 
   #mounts:
   #  - name: jenkins
