@@ -1620,9 +1620,9 @@ server:
     # -- Server service type
     type: NodePort
     # -- Server service http port for NodePort service type (only if `server.service.type` is set to "NodePort")
-    nodePortHttp: 38080
+    nodePortHttp: 3180
     # -- Server service https port for NodePort service type (only if `server.service.type` is set to "NodePort")
-    nodePortHttps: 34343
+    nodePortHttps: 31443
     # -- Server service http port
     servicePortHttp: 80
     # -- Server service https port
