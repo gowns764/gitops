@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 certs=/etc/docker/certs.d/192.168.56.1:8443
-sudo rm -rf /registry-image
-sudo rm -rf /etc/docker/certs
-sudo rm -rf $certs
+rm -rf /registry-image
+rm -rf /etc/docker/certs
+rm -rf $certs
 
 apt -y install sshpass
 for i in {1..2}
