@@ -87,8 +87,6 @@ controller:
   # Set min/max heap here if needed with:
   javaOpts:
     - -Duser.timezone=Asia/Seoul
-    - -Dcasc.jenkins.config=jenkins-config.yaml
-    - -Dhudson.model.DownloadService.noSignatureCheck=true
   jenkinsOpts:
     - --sessionTimeout=1440
     - --sessionEviction=86400
@@ -419,14 +417,19 @@ controller:
   # Node labels and tolerations for pod assignment
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature
-  nodeSelector: {}
+  # nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: csdev
 
   terminationGracePeriodSeconds:
 
   terminationMessagePath:
   terminationMessagePolicy:
 
-  tolerations: []
+  # tolerations: []
+    - key: node-role.kubernetes.io/csdev
+      effect: NoSchedule
+      operator: Exists
 
   affinity: {}
   # Leverage a priorityClass to ensure your pods survive resource shortages
@@ -638,8 +641,8 @@ agent:
   componentName: "jenkins-agent"
   websocket: false
   privileged: false
-  runAsUser:
-  runAsGroup:
+  runAsUser: 1000
+  runAsGroup: 1000
   hostNetworking: false
   resources:
     requests:
@@ -827,7 +830,7 @@ persistence:
   ## A manually managed Persistent Volume and Claim
   ## Requires persistence.enabled: true
   ## If defined, PVC must be created manually before volume will be bound
-  existingClaim: jenkins-pvc
+  existingClaim: jenkins
   ## jenkins data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -835,7 +838,7 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: jenkins-sc
+  storageClass:
   annotations: {}
   labels: {}
   accessMode: "ReadWriteMany"
