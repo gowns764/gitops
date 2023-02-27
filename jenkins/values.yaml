@@ -67,8 +67,8 @@ controller:
       cpu: "50m"
       memory: "256Mi"
     limits:
-      cpu: "2000m"
-      memory: "4096Mi"
+      cpu: "1000m"
+      memory: "2048Mi"
   # Overrides the init container default values
   # initContainerResources:
   #   requests:
@@ -838,9 +838,9 @@ persistence:
   #  - name: nothing
   #    emptyDir: {}
   mounts:
-    - mountPath: "/mnt/nfs_shared/jenkins"
-      name: jenkins-data
-  #readOnly: true
+  #  - mountPath: /var/nothing
+  #    name: nothing
+  #    readOnly: true
 
 networkPolicy:
   # Enable creation of NetworkPolicy resources.
