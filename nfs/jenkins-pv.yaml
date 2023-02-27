@@ -4,6 +4,7 @@ metadata:
   name: jenkins-pv
   namespace: jenkins
 spec:
+  storageClassName: jenkins-sc
   capacity:
     storage: 10Gi
   accessModes:
