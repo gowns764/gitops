@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 certs=/etc/docker/certs.d/192.168.56.1:8443
-mkdir /registry-image
-mkdir /etc/docker/certs
-mkdir -p $certs
-openssl req -x509 -config $(dirname "$0")/tls.csr -nodes -newkey rsa:4096 \
+sudo mkdir /registry-image
+sudo mkdir /etc/docker/certs
+sudo mkdir -p $certs
+sudo openssl req -x509 -config $(dirname "$0")/tls.csr -nodes -newkey rsa:4096 \
 -keyout tls.key -out tls.crt -days 365 -extensions v3_req
 
-apt -y install sshpass
+sudo apt -y install sshpass
 for i in {1..2}
   do
-    sshpass -p 1234 ssh -o StrictHostKeyChecking=no root@192.168.56.$i mkdir -p $certs
-    sshpass -p 1234 scp tls.crt 192.168.56.$i:$certs
+    sudo sshpass -p 1234 ssh -o StrictHostKeyChecking=no root@192.168.56.$i mkdir -p $certs
+    sudo sshpass -p 1234 scp tls.crt 192.168.56.$i:$certs
   done
   
-cp tls.crt $certs
-mv tls.* /etc/docker/certs
+sudo cp tls.crt $certs
+sudo mv tls.* /etc/docker/certs
 
 docker run -d \
   --restart=always \
