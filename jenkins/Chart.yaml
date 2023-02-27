@@ -21,16 +21,8 @@ description: Jenkins - Build great things at any scale! The leading open source 
 home: https://jenkins.io/
 icon: https://get.jenkins.io/art/jenkins-logo/logo.svg
 maintainers:
-- email: maor.friedman@redhat.com
-  name: maorfr
-- email: mail@torstenwalter.de
-  name: torstenwalter
-- email: garridomota@gmail.com
-  name: mogaal
-- email: wmcdona89@gmail.com
-  name: wmcdona89
-- email: timjacomb1@gmail.com
-  name: timja
+- email: gowns0719@gmail.com
+  name: haejun.ko
 name: jenkins
 sources:
 - https://github.com/jenkinsci/jenkins
