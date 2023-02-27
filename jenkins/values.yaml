@@ -846,10 +846,10 @@ persistence:
         server: 192.168.56.1
         path: /mnt/nfs_shared/jenkins
 
-  mounts:
-    - name: jenkins
-      mountPath: /var/jenkins_home
-      readOnly: true
+  #mounts:
+  #  - name: jenkins
+  #    mountPath: /var/jenkins_home
+  #    readOnly: true
 
 networkPolicy:
   # Enable creation of NetworkPolicy resources.
