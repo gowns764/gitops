@@ -838,7 +838,7 @@ persistence:
   #  - name: nothing
   #    emptyDir: {}
   mounts:
-    - mountPath: /var/jenkins_home
+    - mountPath: "/mnt/nfs_shared/jenkins"
       name: jenkins-data
   #readOnly: true
 
