@@ -426,10 +426,7 @@ controller:
   terminationMessagePath:
   terminationMessagePolicy:
 
-  # tolerations: []
-    - key: node-role.kubernetes.io/csdev
-      effect: NoSchedule
-      operator: Exists
+  tolerations: []
 
   affinity: {}
   # Leverage a priorityClass to ensure your pods survive resource shortages
