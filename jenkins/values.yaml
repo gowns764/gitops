@@ -417,14 +417,19 @@ controller:
   # Node labels and tolerations for pod assignment
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature
-  nodeSelector: {}
+  # nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: csdev
 
   terminationGracePeriodSeconds:
 
   terminationMessagePath:
   terminationMessagePolicy:
 
-  tolerations: []
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane 
+      effect: NoSchedule
+      operator: Exists
 
   affinity: {}
   # Leverage a priorityClass to ensure your pods survive resource shortages
