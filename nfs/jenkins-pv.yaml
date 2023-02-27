@@ -10,4 +10,4 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/nfs_share"
+    path: "/mnt/nfs_shared"
