@@ -4,10 +4,12 @@ metadata:
   name: jenkins-pv
   namespace: jenkins
 spec:
-  storageClassName: jenkins-storage
+  # storageClassName: jenkins-storage
   capacity:
     storage: 10Gi
   accessModes:
     - ReadWriteMany
-  hostPath:
-    path: "/mnt/nfs_shared"
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.56.1
+    path: /mnt/nfs_shared/jenkins
