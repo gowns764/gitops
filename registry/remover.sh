@@ -7,7 +7,7 @@ sudo rm -rf $certs
 apt -y install sshpass
 for i in {1..2}
   do
-    sshpass -p 1234 ssh -o StrictHostKeyChecking=no root@192.168.56.$i rm -rf $certs
+    sshpass -p 1234 ssh -o StrictHostKeyChecking=no root@192.168.56.1$i rm -rf $certs
   done
 
 apt remove sshpass -y

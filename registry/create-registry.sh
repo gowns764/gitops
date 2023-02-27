@@ -9,8 +9,8 @@ sudo openssl req -x509 -config $(dirname "$0")/tls.csr -nodes -newkey rsa:4096 \
 sudo apt -y install sshpass
 for i in {1..2}
   do
-    sudo sshpass -p 1234 ssh -o StrictHostKeyChecking=no root@192.168.56.$i mkdir -p $certs
-    sudo sshpass -p 1234 scp tls.crt 192.168.56.$i:$certs
+    sudo sshpass -p 1234 ssh -o StrictHostKeyChecking=no root@192.168.56.1$i mkdir -p $certs
+    sudo sshpass -p 1234 scp tls.crt 192.168.56.1$i:$certs
   done
   
 sudo cp tls.crt $certs
