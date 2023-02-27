@@ -85,11 +85,8 @@ controller:
   #   - name: http_proxy
   #     value: "http://192.168.64.1:3128"
   # Set min/max heap here if needed with:
-  javaOpts:
-    - -Duser.timezone=Asia/Seoul
-  jenkinsOpts:
-    - --sessionTimeout=1440
-    - --sessionEviction=86400
+  javaOpts: "-Duser.timezone=Asia/Seoul"
+  jenkinsOpts: "--sessionTimeout=1440 --sessionEviction=86400"
 
   # If you are using the ingress definitions provided by this chart via the `controller.ingress` block the configured hostname will be the ingress hostname starting with `https://` or `http://` depending on the `tls` configuration.
   # The Protocol can be overwritten by specifying `controller.jenkinsUrlProtocol`.
