@@ -42,9 +42,9 @@ labels: {}
 ## Additional container arguments
 ##
 extraArgs:
-   - --enable-skip-login
-   - --enable-insecure-login
-#   - --system-banner="Welcome to Kubernetes"
+  - --enable-skip-login
+  - --enable-insecure-login
+  - --system-banner="Welcome to Kubernetes"
 
 ## Additional container environment variables
 ##
