@@ -157,6 +157,7 @@ controller:
       periodSeconds: 10
       timeoutSeconds: 5
       failureThreshold: 12
+      initialDelaySeconds: 120
     livenessProbe:
       failureThreshold: 5
       httpGet:
@@ -164,9 +165,9 @@ controller:
         port: http
       periodSeconds: 10
       timeoutSeconds: 5
+      initialDelaySeconds: 10
       # If Startup Probe is not supported on your Kubernetes cluster, you might want to use "initialDelaySeconds" instead.
       # It delays the initial liveness probe while Jenkins is starting
-      # initialDelaySeconds: 60
     readinessProbe:
       failureThreshold: 3
       httpGet:
@@ -174,9 +175,9 @@ controller:
         port: http
       periodSeconds: 10
       timeoutSeconds: 5
+      initialDelaySeconds: 10
       # If Startup Probe is not supported on your Kubernetes cluster, you might want to use "initialDelaySeconds" instead.
       # It delays the initial readyness probe while Jenkins is starting
-      # initialDelaySeconds: 60
 
   # PodDisruptionBudget config
   podDisruptionBudget:
