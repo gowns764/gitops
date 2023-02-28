@@ -41,9 +41,9 @@ labels: {}
 
 ## Additional container arguments
 ##
-# extraArgs:
-#   - --enable-skip-login
-#   - --enable-insecure-login
+extraArgs:
+   - --enable-skip-login
+   - --enable-insecure-login
 #   - --system-banner="Welcome to Kubernetes"
 
 ## Additional container environment variables
@@ -139,7 +139,7 @@ resources:
 protocolHttp: false
 
 service:
-  type: ClusterIP
+  type: NodePort
   # Dashboard service port
   externalPort: 443
 

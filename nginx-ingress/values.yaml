@@ -128,7 +128,7 @@ controller:
     ## Minimum number of replicas for the HPA.
     minReplicas: 1
     ## Maximum number of replicas for the HPA.
-    maxReplicas: 3
+    maxReplicas: 2
     ## The target cpu utilization percentage.
     targetCPUUtilizationPercentage: 50
     ## The target memory utilization percentage.
@@ -267,7 +267,7 @@ controller:
     create: true
 
     ## The type of service to create for the Ingress Controller.
-    type: LoadBalancer
+    type: NodePort
 
     ## The externalTrafficPolicy of the service. The value Local preserves the client source IP.
     externalTrafficPolicy: Local
@@ -311,7 +311,7 @@ controller:
       port: 80
 
       ## The custom NodePort for the HTTP port. Requires controller.service.type set to NodePort.
-      # nodePort: 80
+      nodePort: 80
 
       ## The HTTP port on the POD where the Ingress Controller service is running.
       targetPort: 80
@@ -324,7 +324,7 @@ controller:
       port: 443
 
       ## The custom NodePort for the HTTPS port. Requires controller.service.type set to NodePort.
-      # nodePort: 443
+      nodePort: 443
 
       ## The HTTPS port on the POD where the Ingress Controller service is running.
       targetPort: 443
