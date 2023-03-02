@@ -11,7 +11,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: jenkins
-  local:
+  nfs:
+    server: 192.168.56.1
     path: /mnt/nfs_shared/jenkins
 ---
 apiVersion: v1
