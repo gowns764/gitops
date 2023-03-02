@@ -723,7 +723,10 @@ agent:
   # readOnly: false
   #
   # Pod-wide environment, these vars are visible to any container in the agent pod
-  envVars: []
+  envVars:
+  - envVars:
+      key: "JENKINS_URL"
+      value: "http://192.168.56.1"
   # - name: PATH
   #   value: /usr/local/bin
   # Mount a secret as environment variable
@@ -741,6 +744,14 @@ agent:
   args: "${computer.jnlpmac} ${computer.name}"
   # Side container name
   sideContainerName: "jnlp"
+
+  livenessProbe:
+    failureThreshold: 0
+    initialDelaySeconds: 0
+    periodSeconds: 0
+    successThreshold: 0
+    timeoutSeconds: 0
+
   # Doesn't allocate pseudo TTY by default
   TTYEnabled: false
   # Max number of spawned agent
@@ -872,7 +883,9 @@ networkPolicy:
   # You can allow agents to connect from both within the cluster (from within specific/all namespaces) AND/OR from a given external IP range
   internalAgents:
     allowed: true
-    podLabels: {}
+    podLabels:
+    - key: "jenkins/jenkins-jenkins-agent"
+      value: "true"
     namespaceLabels: {}
       # project: myproject
   externalAgents: {}
@@ -900,6 +913,8 @@ serviceAccountAgent:
   # The name of the ServiceAccount to use.
   # If not set and create is true, a name is generated using the fullname template
   name: "jenkins"
+  runAsUser: 1000
+  runAsGroup: 993
   annotations: {}
   extraLabels: {}
   imagePullSecretName:
