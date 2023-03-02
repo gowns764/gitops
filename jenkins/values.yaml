@@ -152,30 +152,28 @@ controller:
   probes:
     startupProbe:
       httpGet:
-        path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
-        port: 8080
+        path: '/login'
+        port: http
       periodSeconds: 10
       timeoutSeconds: 5
       failureThreshold: 12
-      # initialDelaySeconds: 60
+      initialDelaySeconds: 120
     livenessProbe:
       failureThreshold: 5
       httpGet:
-        path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
-        port: 8080
+        path: '/login'
+        port: http
       periodSeconds: 10
       timeoutSeconds: 5
-      initialDelaySeconds: 90
       # If Startup Probe is not supported on your Kubernetes cluster, you might want to use "initialDelaySeconds" instead.
       # It delays the initial liveness probe while Jenkins is starting
     readinessProbe:
       failureThreshold: 3
       httpGet:
-        path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
-        port: 8080
+        path: '/login'
+        port: http
       periodSeconds: 10
       timeoutSeconds: 5
-      initialDelaySeconds: 60
       # If Startup Probe is not supported on your Kubernetes cluster, you might want to use "initialDelaySeconds" instead.
       # It delays the initial readyness probe while Jenkins is starting
 
@@ -320,61 +318,7 @@ controller:
   #   renew: 60               # optional
 
   # Name of default cloud configuration.
-  clouds:
-  - kubernetes:
-      containerCap: 10
-      containerCapStr: "10"
-      jenkinsTunnel: "jenkins-agent:50000"
-      jenkinsUrl: "http://jenkins:80"
-      maxRequestsPerHost: 32
-      maxRequestsPerHostStr: "32"
-      name: "kubernetes"
-      namespace: "jenkins"
-      podLabels:
-      - key: "jenkins/jenkins-jenkins-slave"
-        value: "true"
-      serverUrl: "https://kubernetes.default"
-      templates:
-      - containers:
-        - args: "^${computer.jnlpmac} ^${computer.name}"
-          command: ""
-          envVars:
-          - envVar:
-              key: "JENKINS_URL"
-              value: "http://192.168.56.1"
-          image: "jenkins/inbound-agent"
-          livenessProbe:
-            failureThreshold: 0
-            initialDelaySeconds: 0
-            periodSeconds: 0
-            successThreshold: 0
-            timeoutSeconds: 0
-          name: "jnlp"
-          resourceLimitCpu: "512m"
-          resourceLimitMemory: "512Mi"
-          resourceRequestCpu: "512m"
-          resourceRequestMemory: "512Mi"
-          workingDir: "/home/jenkins/agent"
-        hostNetwork: false
-        label: "jenkins-jenkins-slave "
-        name: "default"
-        nodeUsageMode: NORMAL
-        podRetention: "never"
-        runAsGroup: "993"
-        runAsUser: "1000"
-        serviceAccount: "jenkins"
-        volumes:
-        - hostPathVolume:
-            hostPath: "/usr/bin/kubectl"
-            mountPath: "/usr/bin/kubectl"
-        - hostPathVolume:
-            hostPath: "/bin/docker"
-            mountPath: "/bin/docker"
-        - hostPathVolume:
-            hostPath: "/run/docker.sock"
-            mountPath: "/run/docker.sock"
-        yamlMergeStrategy: "override"
-  # cloudName: "kubernetes"
+  cloudName: "kubernetes"
 
   # Below is the implementation of Jenkins Configuration as Code.  Add a key under configScripts for each configuration area,
   # where each corresponds to a plugin or section of the UI.  Each key (prior to | character) is just a label, and can be any value.
