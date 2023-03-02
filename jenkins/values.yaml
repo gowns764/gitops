@@ -723,10 +723,7 @@ agent:
   # readOnly: false
   #
   # Pod-wide environment, these vars are visible to any container in the agent pod
-  envVars:
-  - envVar:
-      key: "JENKINS_URL"
-      value: "http://192.168.56.1"
+  envVars: []
   # - name: PATH
   #   value: /usr/local/bin
   # Mount a secret as environment variable
@@ -744,13 +741,6 @@ agent:
   args: "${computer.jnlpmac} ${computer.name}"
   # Side container name
   sideContainerName: "jnlp"
-
-  livenessProbe:
-    failureThreshold: 0
-    initialDelaySeconds: 0
-    periodSeconds: 0
-    successThreshold: 0
-    timeoutSeconds: 0
 
   # Doesn't allocate pseudo TTY by default
   TTYEnabled: false
@@ -883,9 +873,7 @@ networkPolicy:
   # You can allow agents to connect from both within the cluster (from within specific/all namespaces) AND/OR from a given external IP range
   internalAgents:
     allowed: true
-    podLabels:
-    - key: "jenkins/jenkins-jenkins-agent"
-      value: "true"
+    podLabels: {}
     namespaceLabels: {}
       # project: myproject
   externalAgents: {}
