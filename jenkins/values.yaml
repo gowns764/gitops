@@ -420,19 +420,19 @@ controller:
   # Node labels and tolerations for pod assignment
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature
-  nodeSelector: {}
-  # nodeSelector:
-  #  kubernetes.io/hostname: csdev
+  # nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: csdev
 
   terminationGracePeriodSeconds:
 
   terminationMessagePath:
   terminationMessagePolicy:
 
-  tolerations: {}
-  #  - key: node-role.kubernetes.io/control-plane 
-  #    effect: NoSchedule
-  #    operator: Exists
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane 
+      effect: NoSchedule
+      operator: Exists
 
   affinity: {}
   # Leverage a priorityClass to ensure your pods survive resource shortages
@@ -796,7 +796,7 @@ agent:
   # Keys are only used to give the pod template a meaningful name.  The only restriction is they may only contain RFC 1123 \ DNS label
   # characters: lowercase letters, numbers, and hyphens. Each pod template can contain multiple containers.
   # For this pod templates configuration to be loaded the following values must be set:
-  controller.JCasC.defaultConfig: true
+  # controller.JCasC.defaultConfig: true
   # Best reference is https://<jenkins_url>/configuration-as-code/reference#Cloud-kubernetes. The example below creates a python pod template.
   podTemplates: {}
   #  python: |
