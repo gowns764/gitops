@@ -742,19 +742,12 @@ agent:
   # Side container name
   sideContainerName: "jnlp"
 
-  livenessProbe:
-    failureThreshold: 0
-    initialDelaySeconds: 0
-    periodSeconds: 0
-    successThreshold: 0
-    timeoutSeconds: 0
-
   # Doesn't allocate pseudo TTY by default
   TTYEnabled: false
   # Max number of spawned agent
   containerCap: 10
   # Pod name
-  podName: "default"
+  podName: "jenkins"
   # Allows the Pod to remain active for reuse until the configured number of
   # minutes has passed since the last step was executed on it.
   idleMinutes: 0
