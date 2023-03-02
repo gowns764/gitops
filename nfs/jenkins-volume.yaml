@@ -10,8 +10,8 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  nfs:
-    server: 192.168.56.1
+  storageClassName: jenkins
+  local:
     path: /mnt/nfs_shared/jenkins
 ---
 apiVersion: v1
