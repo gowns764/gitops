@@ -848,7 +848,7 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: jenkins
+  storageClass:
   annotations: {}
   labels: {}
   accessMode: "ReadWriteMany"
@@ -884,7 +884,7 @@ networkPolicy:
 ## Install Default RBAC roles and bindings
 rbac:
   create: true
-  readSecrets: true
+  readSecrets: false
 
 serviceAccount:
   create: true
