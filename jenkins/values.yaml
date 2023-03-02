@@ -724,7 +724,7 @@ agent:
   #
   # Pod-wide environment, these vars are visible to any container in the agent pod
   envVars:
-  - envVars:
+  - envVar:
       key: "JENKINS_URL"
       value: "http://192.168.56.1"
   # - name: PATH
@@ -744,6 +744,13 @@ agent:
   args: "${computer.jnlpmac} ${computer.name}"
   # Side container name
   sideContainerName: "jnlp"
+
+  livenessProbe:
+    failureThreshold: 0
+    initialDelaySeconds: 0
+    periodSeconds: 0
+    successThreshold: 0
+    timeoutSeconds: 0
 
   # Doesn't allocate pseudo TTY by default
   TTYEnabled: false
