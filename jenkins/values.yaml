@@ -19,8 +19,8 @@ controller:
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-controller"
   image: "jenkins/jenkins"
-  tag: "2.375.3-jdk11"
-  # tagLabel: jdk11
+  # tag: "2.375.3-jdk11"
+  tagLabel: jdk11
   imagePullPolicy: "Always"
   imagePullSecretName:
   # Optionally configure lifetime for controller-container
@@ -64,8 +64,8 @@ controller:
   #   - --httpPort=8080
   resources:
     requests:
-      cpu: "500m"
-      memory: "1024Mi"
+      cpu: "50m"
+      memory: "256Mi"
     limits:
       cpu: "2000m"
       memory: "4096Mi"
@@ -87,12 +87,11 @@ controller:
   # Set min/max heap here if needed with:
   javaOpts: "-Duser.timezone=Asia/Seoul"
   jenkinsOpts: "--sessionTimeout=1440 --sessionEviction=86400"
-
   # If you are using the ingress definitions provided by this chart via the `controller.ingress` block the configured hostname will be the ingress hostname starting with `https://` or `http://` depending on the `tls` configuration.
   # The Protocol can be overwritten by specifying `controller.jenkinsUrlProtocol`.
   # jenkinsUrlProtocol: "https"
   # If you are not using the provided ingress you can specify `controller.jenkinsUrl` to change the url definition.
-  jenkinsUrl: "http://192.168.56.1/"
+  # jenkinsUrl: ""
   # If you set this prefix and use ingress controller then you might want to set the ingress path below
   # jenkinsUriPrefix: "/jenkins"
   # Enable pod security context (must be `true` if podSecurityContextOverride, runAsUser or fsGroup are set)
@@ -123,7 +122,7 @@ controller:
     runAsGroup: 1000
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
-  servicePort: 8080
+  servicePort: 80
   targetPort: 8080
   # For minikube, set this to NodePort, elsewhere use LoadBalancer
   # Use ClusterIP if your setup includes ingress controller
@@ -143,7 +142,6 @@ controller:
   # Put labels on Jenkins controller pod
   podLabels: {}
   # Used to create Ingress record (should used with ServiceType: ClusterIP)
-  # nodePort: <to set explicitly, choose port between 30000-32767
   nodePort: 32267
   # Enable Kubernetes Startup, Liveness and Readiness Probes
   # if Startup Probe is supported, enable it too
@@ -167,6 +165,7 @@ controller:
       timeoutSeconds: 5
       # If Startup Probe is not supported on your Kubernetes cluster, you might want to use "initialDelaySeconds" instead.
       # It delays the initial liveness probe while Jenkins is starting
+      # initialDelaySeconds: 60
     readinessProbe:
       failureThreshold: 3
       httpGet:
@@ -176,6 +175,7 @@ controller:
       timeoutSeconds: 5
       # If Startup Probe is not supported on your Kubernetes cluster, you might want to use "initialDelaySeconds" instead.
       # It delays the initial readyness probe while Jenkins is starting
+      # initialDelaySeconds: 60
 
   # PodDisruptionBudget config
   podDisruptionBudget:
@@ -240,16 +240,16 @@ controller:
 
   # List of plugins to be install during Jenkins controller start
   installPlugins:
-    - kubernetes:3883.v4d70a_a_a_df034
-    - kubernetes-cli:1.12.0
-    - workflow-aggregator:590.v6a_d052e5a_a_b_5
-    - git:5.0.0
-    - configuration-as-code:1569.vb_72405b_80249
-    - maven-plugin:3.20
-    - docker-plugin:1.3.0
-    - docker-commons:1.21
-    - disk-usage:0.28
-    - thinBackup:1.15
+    - kubernetes
+    - kubernetes-cli
+    - workflow-aggregator
+    - git
+    - configuration-as-code
+    - maven-plugin
+    - docker-plugin
+    - docker-commons
+    - disk-usage
+    - thinBackup
 
   # Set to false to download the minimum required version of all dependencies.
   installLatestPlugins: true
@@ -420,19 +420,14 @@ controller:
   # Node labels and tolerations for pod assignment
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature
-  # nodeSelector: {}
-  nodeSelector:
-    kubernetes.io/hostname: csdev
+  nodeSelector: {}
 
   terminationGracePeriodSeconds:
 
   terminationMessagePath:
   terminationMessagePolicy:
 
-  tolerations:
-    - key: node-role.kubernetes.io/control-plane 
-      effect: NoSchedule
-      operator: Exists
+  tolerations: []
 
   affinity: {}
   # Leverage a priorityClass to ensure your pods survive resource shortages
@@ -627,7 +622,7 @@ agent:
   enabled: true
   defaultsProviderTemplate: ""
   # URL for connecting to the Jenkins contoller
-  jenkinsUrl: "http://192.168.56.1"
+  jenkinsUrl:
   # connect to the specified host and port, instead of connecting directly to the Jenkins controller
   jenkinsTunnel:
   kubernetesConnectTimeout: 5
@@ -644,8 +639,8 @@ agent:
   componentName: "jenkins-agent"
   websocket: false
   privileged: false
-  runAsUser: 1000
-  runAsGroup: 993
+  runAsUser:
+  runAsGroup:
   hostNetworking: false
   resources:
     requests:
@@ -660,37 +655,31 @@ agent:
   # Possible values: Always, Never, OnFailure
   podRetention: "Never"
   # Disable if you do not want the Yaml the agent pod template to show up
-  # in the job Console Output. This can be helpful for either security reasonss
+  # in the job Console Output. This can be helpful for either security reasons
   # or simply to clean up the output to make it easier to read.
   showRawYaml: true
   # You can define the volumes that you want to mount for this container
   # Allowed types are: ConfigMap, EmptyDir, HostPath, Nfs, PVC, Secret
   # Configure the attributes as they appear in the corresponding Java class for that type
   # https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes
-  volumes:
+  volumes: []
   # - type: ConfigMap
   #   configMapName: myconfigmap
   #   mountPath: /var/myapp/myconfigmap
   # - type: EmptyDir
   #   mountPath: /var/myapp/myemptydir
   #   memory: false
-  - type: HostPath
-    hostPath: /usr/bin/kubectl
-    mountPath: /usr/bin/kubectl
-  - type: HostPath
-    hostPath: /usr/bin/docker
-    mountPath: /usr/bin/docker
-  - type: HostPath
-    hostPath: /run/docker.sock
-    mountPath: /run/docker.sock
+  # - type: HostPath
+  #   hostPath: /var/lib/containers
+  #   mountPath: /var/myapp/myhostpath
   # - type: Nfs
   #   mountPath: /var/myapp/mynfs
   #   readOnly: false
   #   serverAddress: "192.0.2.0"
   #   serverPath: /var/lib/containers
   # - type: PVC
-  #   claimName: jenkins
-  #   mountPath: /home/jenkins/agent
+  #   claimName: mypvc
+  #   mountPath: /var/myapp/mypvc
   #   readOnly: false
   # - type: Secret
   #   defaultMode: "600"
@@ -702,7 +691,7 @@ agent:
   # Allowed types are: DynamicPVC, EmptyDir, HostPath, Nfs, PVC
   # Configure the attributes as they appear in the corresponding Java class for that type
   # https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes/workspace
-  workspaceVolume:
+  workspaceVolume: {}
   ## DynamicPVC example
   # type: DynamicPVC
   # configMapName: myconfigmap
@@ -719,7 +708,7 @@ agent:
   # serverPath: /var/lib/containers
   ## PVC example
   # type: PVC
-  # claimName: jenkins
+  # claimName: mypvc
   # readOnly: false
   #
   # Pod-wide environment, these vars are visible to any container in the agent pod
@@ -741,7 +730,6 @@ agent:
   args: "${computer.jnlpmac} ${computer.name}"
   # Side container name
   sideContainerName: "jnlp"
-
   # Doesn't allocate pseudo TTY by default
   TTYEnabled: false
   # Max number of spawned agent
@@ -851,17 +839,14 @@ persistence:
   storageClass:
   annotations: {}
   labels: {}
-  accessMode: "ReadWriteMany"
+  accessMode: "ReadWriteOnce"
   size: "10Gi"
-  #volumes:
-  #  - name: jenkins
-  #    nfs:
-  #      server: 192.168.56.1
-  #      path: /mnt/nfs_shared/jenkins
-
-  #mounts:
-  #  - name: jenkins
-  #    mountPath: /var/jenkins_home
+  volumes:
+  #  - name: nothing
+  #    emptyDir: {}
+  mounts:
+  #  - mountPath: /var/nothing
+  #    name: nothing
   #    readOnly: true
 
 networkPolicy:
