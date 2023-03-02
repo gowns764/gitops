@@ -842,10 +842,10 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass:
+  storageClass: "jenkins"
   annotations: {}
   labels: {}
-  accessMode: "ReadWriteOnce"
+  accessMode: "ReadWriteMany"
   size: "10Gi"
   volumes:
   #  - name: nothing
