@@ -901,8 +901,6 @@ serviceAccountAgent:
   # The name of the ServiceAccount to use.
   # If not set and create is true, a name is generated using the fullname template
   name: "jenkins"
-  runAsUser: 1000
-  runAsGroup: 993
   annotations: {}
   extraLabels: {}
   imagePullSecretName:
