@@ -320,7 +320,61 @@ controller:
   #   renew: 60               # optional
 
   # Name of default cloud configuration.
-  cloudName: "kubernetes"
+  clouds:
+  - kubernetes:
+      containerCap: 10
+      containerCapStr: "10"
+      jenkinsTunnel: "jenkins-agent:50000"
+      jenkinsUrl: "http://jenkins:80"
+      maxRequestsPerHost: 32
+      maxRequestsPerHostStr: "32"
+      name: "kubernetes"
+      namespace: "jenkins"
+      podLabels:
+      - key: "jenkins/jenkins-jenkins-slave"
+        value: "true"
+      serverUrl: "https://kubernetes.default"
+      templates:
+      - containers:
+        - args: "^${computer.jnlpmac} ^${computer.name}"
+          command: ""
+          envVars:
+          - envVar:
+              key: "JENKINS_URL"
+              value: "http://192.168.56.1"
+          image: "jenkins/inbound-agent"
+          livenessProbe:
+            failureThreshold: 0
+            initialDelaySeconds: 0
+            periodSeconds: 0
+            successThreshold: 0
+            timeoutSeconds: 0
+          name: "jnlp"
+          resourceLimitCpu: "512m"
+          resourceLimitMemory: "512Mi"
+          resourceRequestCpu: "512m"
+          resourceRequestMemory: "512Mi"
+          workingDir: "/home/jenkins/agent"
+        hostNetwork: false
+        label: "jenkins-jenkins-slave "
+        name: "default"
+        nodeUsageMode: NORMAL
+        podRetention: "never"
+        runAsGroup: "993"
+        runAsUser: "1000"
+        serviceAccount: "jenkins"
+        volumes:
+        - hostPathVolume:
+            hostPath: "/usr/bin/kubectl"
+            mountPath: "/usr/bin/kubectl"
+        - hostPathVolume:
+            hostPath: "/bin/docker"
+            mountPath: "/bin/docker"
+        - hostPathVolume:
+            hostPath: "/run/docker.sock"
+            mountPath: "/run/docker.sock"
+        yamlMergeStrategy: "override"
+  # cloudName: "kubernetes"
 
   # Below is the implementation of Jenkins Configuration as Code.  Add a key under configScripts for each configuration area,
   # where each corresponds to a plugin or section of the UI.  Each key (prior to | character) is just a label, and can be any value.
@@ -684,10 +738,10 @@ agent:
   #   readOnly: false
   #   serverAddress: "192.0.2.0"
   #   serverPath: /var/lib/containers
-  - type: PVC
-    claimName: jenkins-pvc
-    mountPath: /home/jenkins/agent
-    readOnly: false
+  # - type: PVC
+  #   claimName: jenkins
+  #   mountPath: /home/jenkins/agent
+  #   readOnly: false
   # - type: Secret
   #   defaultMode: "600"
   #   mountPath: /var/myapp/mysecret
@@ -714,9 +768,9 @@ agent:
   # serverAddress: "192.0.2.0"
   # serverPath: /var/lib/containers
   ## PVC example
-  type: PVC
-  claimName: jenkins-pvc
-  readOnly: false
+  # type: PVC
+  # claimName: jenkins
+  # readOnly: false
   #
   # Pod-wide environment, these vars are visible to any container in the agent pod
   envVars: []
@@ -835,7 +889,7 @@ persistence:
   ## A manually managed Persistent Volume and Claim
   ## Requires persistence.enabled: true
   ## If defined, PVC must be created manually before volume will be bound
-  existingClaim: jenkins-pvc
+  existingClaim: jenkins
   ## jenkins data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -843,7 +897,7 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: jenkins-sc
+  storageClass: jenkins
   annotations: {}
   labels: {}
   accessMode: "ReadWriteMany"
