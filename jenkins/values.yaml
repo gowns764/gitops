@@ -64,8 +64,8 @@ controller:
   #   - --httpPort=8080
   resources:
     requests:
-      cpu: "50m"
-      memory: "256Mi"
+      cpu: "500m"
+      memory: "1024Mi"
     limits:
       cpu: "2000m"
       memory: "4096Mi"
@@ -420,19 +420,19 @@ controller:
   # Node labels and tolerations for pod assignment
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature
-  # nodeSelector: {}
-  nodeSelector:
-    kubernetes.io/hostname: csdev
+  nodeSelector: {}
+  # nodeSelector:
+  #  kubernetes.io/hostname: csdev
 
   terminationGracePeriodSeconds:
 
   terminationMessagePath:
   terminationMessagePolicy:
 
-  tolerations:
-    - key: node-role.kubernetes.io/control-plane 
-      effect: NoSchedule
-      operator: Exists
+  tolerations: {}
+  #  - key: node-role.kubernetes.io/control-plane 
+  #    effect: NoSchedule
+  #    operator: Exists
 
   affinity: {}
   # Leverage a priorityClass to ensure your pods survive resource shortages
