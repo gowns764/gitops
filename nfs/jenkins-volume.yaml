@@ -23,6 +23,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
+  storageClassName: jenkins
   resources:
     requests:
       storage: 10Gi
