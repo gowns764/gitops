@@ -662,16 +662,22 @@ agent:
   # Allowed types are: ConfigMap, EmptyDir, HostPath, Nfs, PVC, Secret
   # Configure the attributes as they appear in the corresponding Java class for that type
   # https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes
-  volumes: []
+  volumes:
   # - type: ConfigMap
   #   configMapName: myconfigmap
   #   mountPath: /var/myapp/myconfigmap
   # - type: EmptyDir
   #   mountPath: /var/myapp/myemptydir
   #   memory: false
-  # - type: HostPath
-  #   hostPath: /var/lib/containers
-  #   mountPath: /var/myapp/myhostpath
+  - type: HostPath
+    hostPath: /usr/bin/kubectl
+    mountPath: /usr/bin/kubectl
+  - type: HostPath
+    hostPath: /usr/bin/docker
+    mountPath: /usr/bin/docker
+  - type: HostPath
+    hostPath: /run/docker.sock
+    mountPath: /run/docker.sock
   # - type: Nfs
   #   mountPath: /var/myapp/mynfs
   #   readOnly: false
