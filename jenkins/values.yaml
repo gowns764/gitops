@@ -243,11 +243,13 @@ controller:
     - kubernetes
     - kubernetes-cli
     - workflow-aggregator
+    - pipeline-stage-view
     - git
     - configuration-as-code
     - maven-plugin
     - docker-plugin
     - docker-commons
+    - docker-workflow
     - disk-usage
     - thinBackup
 
