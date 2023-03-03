@@ -645,9 +645,9 @@ agent:
   imagePullSecretName:
   componentName: "jenkins-agent"
   websocket: false
-  privileged: false
-  runAsUser:
-  runAsGroup:
+  privileged: true
+  runAsUser: 1000
+  runAsGroup: 1000
   hostNetworking: false
   resources:
     requests:
@@ -685,11 +685,11 @@ agent:
   - type: HostPath
     hostPath: /run/docker.sock
     mountPath: /run/docker.sock
-  # - type: Nfs
-  #   mountPath: /mnt/nfs_shared/jenkins
-  #   readOnly: false
-  #   serverAddress: "192.168.56.1"
-  #   serverPath: /var/lib/containers
+  - type: Nfs
+    mountPath: /mnt/nfs_shared/jenkins
+    readOnly: false
+    serverAddress: "192.168.56.1"
+    serverPath: /var/lib/containers
   # - type: PVC
   #   claimName: mypvc
   #   mountPath: /var/myapp/mypvc
