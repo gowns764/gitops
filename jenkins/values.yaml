@@ -629,7 +629,7 @@ agent:
   enabled: true
   defaultsProviderTemplate: ""
   # URL for connecting to the Jenkins contoller
-  jenkinsUrl: "http:192.168.56.1"
+  jenkinsUrl: "http://192.168.56.1"
   # connect to the specified host and port, instead of connecting directly to the Jenkins controller
   jenkinsTunnel:
   kubernetesConnectTimeout: 5
@@ -683,8 +683,8 @@ agent:
     hostPath: /usr/bin/docker
     mountPath: /usr/bin/docker
   - type: HostPath
-    hostPath: /run/docker.sock
-    mountPath: /run/docker.sock
+    hostPath: /var/run/docker.sock
+    mountPath: /var/run/docker.sock
   # - type: Nfs
   #   mountPath: /mnt/nfs_shared/jenkins
   #   readOnly: false
