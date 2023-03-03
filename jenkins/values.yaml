@@ -834,7 +834,7 @@ persistence:
   ## A manually managed Persistent Volume and Claim
   ## Requires persistence.enabled: true
   ## If defined, PVC must be created manually before volume will be bound
-  existingClaim: "jenkins"
+  existingClaim: jenkins
   ## jenkins data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -842,16 +842,16 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: "jenkins"
+  storageClass:
   annotations: {}
   labels: {}
   accessMode: "ReadWriteMany"
-  size: "10Gi"
+  size: 10Gi
   volumes:
   #  - name: nothing
   #    emptyDir: {}
   mounts:
-  #  - mountPath: /var/nothing
+    - mountPath: /var/jenkins_home
   #    name: nothing
   #    readOnly: true
 
