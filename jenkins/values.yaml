@@ -855,7 +855,7 @@ persistence:
   #  - name: nothing
   #    emptyDir: {}
   mounts:
-    - mountPath: /var/jenkins_home
+  #  - mountPath: /var/jenkins_home
   #    name: nothing
   #    readOnly: true
 
