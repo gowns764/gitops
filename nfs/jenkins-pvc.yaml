@@ -7,7 +7,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
+  ReclaimPolicy: Retain
   resources:
     requests:
       storage: 10Gi
