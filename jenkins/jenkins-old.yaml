@@ -1,0 +1,171 @@
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  clouds:
+  - kubernetes:
+      containerCap: 10
+      containerCapStr: "10"
+      jenkinsTunnel: "jenkins-agent.jenkins.svc.cluster.local:50000"
+      jenkinsUrl: "http://jenkins.jenkins.svc.cluster.local:80"
+      name: "kubernetes"
+      namespace: "jenkins"
+      podLabels:
+      - key: "jenkins/jenkins-jenkins-agent"
+        value: "true"
+      serverUrl: "https://kubernetes.default"
+      templates:
+      - containers:
+        - args: "^${computer.jnlpmac} ^${computer.name}"
+          envVars:
+          - envVar:
+              key: "JENKINS_URL"
+              value: "http://jenkins.jenkins.svc.cluster.local:80/"
+          image: "jenkins/inbound-agent:4.11.2-4"
+          livenessProbe:
+            failureThreshold: 0
+            initialDelaySeconds: 0
+            periodSeconds: 0
+            successThreshold: 0
+            timeoutSeconds: 0
+          name: "jnlp"
+          privileged: true
+          resourceLimitCpu: "512m"
+          resourceLimitMemory: "512Mi"
+          resourceRequestCpu: "512m"
+          resourceRequestMemory: "512Mi"
+          runAsGroup: "1000"
+          runAsUser: "1000"
+          workingDir: "/home/jenkins/agent"
+        id: "b47f2dd62d16038213c2468d964404f99445bf1b1de2afddfd77532dec38b4ee"
+        label: "jenkins-jenkins-agent"
+        name: "default"
+        namespace: "jenkins"
+        nodeUsageMode: "NORMAL"
+        podRetention: "never"
+        serviceAccount: "default"
+        slaveConnectTimeout: 100
+        slaveConnectTimeoutStr: "100"
+        volumes:
+        - hostPathVolume:
+            hostPath: "/usr/bin/kubectl"
+            mountPath: "/usr/bin/kubectl"
+        - hostPathVolume:
+            hostPath: "/usr/bin/docker"
+            mountPath: "/usr/bin/docker"
+        - hostPathVolume:
+            hostPath: "/run/docker.sock"
+            mountPath: "/run/docker.sock"
+        - nfsVolume:
+            mountPath: "/mnt/nfs_shared/jenkins"
+            readOnly: false
+            serverAddress: "192.168.56.1"
+            serverPath: "/var/lib/containers"
+        yamlMergeStrategy: "override"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
+  disableRememberMe: false
+  disabledAdministrativeMonitors:
+  - "hudson.diagnosis.ReverseProxySetupMonitor"
+  labelAtoms:
+  - name: "built-in"
+  - name: "jenkins-jenkins-agent"
+  markupFormatter: "plainText"
+  mode: NORMAL
+  myViewsTabBar: "standard"
+  numExecutors: 0
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
+  securityRealm:
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "admin"
+        name: "Jenkins Admin"
+        properties:
+        - "apiToken"
+        - "mailer"
+        - "myView"
+        - preferredProvider:
+            providerId: "default"
+        - "timezone"
+  slaveAgentPort: 50000
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+  views:
+  - all:
+      name: "all"
+  viewsTabBar: "standard"
+globalCredentialsConfiguration:
+  configuration:
+    providerFilter: "none"
+    typeFilter: "none"
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  gitHooks:
+    allowedOnAgents: false
+    allowedOnController: false
+  gitHostKeyVerificationConfiguration:
+    sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
+  sSHD:
+    port: -1
+unclassified:
+  buildDiscarders:
+    configuredBuildDiscarders:
+    - "jobBuildDiscarder"
+  diskUsageProjectActionFactory:
+    checkWorkspaceOnSlave: false
+    historyLength: 183
+    showGraph: false
+    timeoutWorkspace: 5
+  fingerprints:
+    fingerprintCleanupDisabled: false
+    storage: "file"
+  junitTestResultStorage:
+    storage: "file"
+  location:
+    adminAddress: "address not configured yet <nobody@nowhere>"
+    url: "http://jenkins:80/"
+  mailer:
+    charset: "UTF-8"
+    useSsl: false
+    useTls: false
+  mavenModuleSet:
+    localRepository: "default"
+  pollSCM:
+    pollingThreadCount: 10
+  scmGit:
+    addGitTagAction: false
+    allowSecondFetch: false
+    createAccountBasedOnEmail: false
+    disableGitToolChooser: false
+    hideCredentials: false
+    showEntireCommitSummaryInChanges: false
+    useExistingAccountWithSameEmail: false
+tool:
+  dockerTool:
+    installations:
+    - name: "jenkins-docker"
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"

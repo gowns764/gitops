@@ -739,7 +739,7 @@ agent:
   # jenkins-agent: v1
 
   # Executed command when side container gets started
-  command:
+  command: "/bin/sh -c"
   args: "${computer.jnlpmac} ${computer.name}"
   # Side container name
   sideContainerName: "jnlp"
