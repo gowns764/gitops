@@ -20,10 +20,8 @@ metadata:
   name: jenkins
   namespace: jenkins
 spec:
-  volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
   resources:
     requests:
       storage: 10Gi
