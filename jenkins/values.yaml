@@ -250,6 +250,7 @@ controller:
     - docker-plugin
     - docker-commons
     - docker-workflow
+    - docker-build-step
     - disk-usage
     - thinBackup
 
@@ -628,7 +629,7 @@ agent:
   enabled: true
   defaultsProviderTemplate: ""
   # URL for connecting to the Jenkins contoller
-  jenkinsUrl:
+  jenkinsUrl: "http:192.168.56.1"
   # connect to the specified host and port, instead of connecting directly to the Jenkins controller
   jenkinsTunnel:
   kubernetesConnectTimeout: 5
@@ -645,8 +646,8 @@ agent:
   componentName: "jenkins-agent"
   websocket: false
   privileged: false
-  runAsUser: 1000
-  runAsGroup: 1000
+  runAsUser:
+  runAsGroup:
   hostNetworking: false
   resources:
     requests:
