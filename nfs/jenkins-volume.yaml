@@ -10,7 +10,6 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: jenkins
   nfs:
     server: 192.168.56.1
     path: /mnt/nfs_shared/jenkins
@@ -21,9 +20,10 @@ metadata:
   name: jenkins
   namespace: jenkins
 spec:
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
-  storageClassName: jenkins
+  persistentVolumeReclaimPolicy: Retain
   resources:
     requests:
       storage: 10Gi
