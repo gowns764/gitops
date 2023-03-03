@@ -669,19 +669,19 @@ agent:
   # - type: EmptyDir
   #   mountPath: /var/myapp/myemptydir
   #   memory: false
-  - type: HostPath
-    hostPath: /usr/bin/kubectl
-    mountPath: /usr/bin/kubectl
-  - type: HostPath
-    hostPath: /usr/bin/docker
-    mountPath: /usr/bin/docker
-  - type: HostPath
-    hostPath: /run/docker.sock
-    mountPath: /run/docker.sock
-  - type: Nfs
-    mountPath: /mnt/nfs_shared/jenkins
-    readOnly: false
-    serverAddress: "192.168.56.1"
+  # - type: HostPath
+  #   hostPath: /usr/bin/kubectl
+  #   mountPath: /usr/bin/kubectl
+  # - type: HostPath
+  #   hostPath: /usr/bin/docker
+  #   mountPath: /usr/bin/docker
+  # - type: HostPath
+  #   hostPath: /run/docker.sock
+  #   mountPath: /run/docker.sock
+  # - type: Nfs
+  #   mountPath: /mnt/nfs_shared/jenkins
+  #   readOnly: false
+  #   serverAddress: "192.168.56.1"
   #   serverPath: /var/lib/containers
   # - type: PVC
   #   claimName: mypvc
