@@ -6,12 +6,12 @@ metadata:
   namespace: jenkins
 spec:
   capacity:
-    storage: 10Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 192.168.56.1
+    server: 192.168.56.10
     path: /mnt/nfs_shared/jenkins
 ---
 apiVersion: v1
@@ -24,4 +24,4 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 10Gi
+      storage: 5Gi
