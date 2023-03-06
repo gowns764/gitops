@@ -455,7 +455,7 @@ controller:
         targetPorts:
             http: http
             https: https
-        type: ClusterIP
+        type: LoadBalancer
         ## type: NodePort
         ## nodePorts:
         ##   http: 32080
