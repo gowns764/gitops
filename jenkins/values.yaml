@@ -146,36 +146,35 @@ controller:
   # Enable Kubernetes Startup, Liveness and Readiness Probes
   # if Startup Probe is supported, enable it too
   # ~ 2 minutes to allow Jenkins to restart when upgrading plugins. Set ReadinessTimeout to be shorter than LivenessTimeout.
-  healthProbes: false
+  healthProbes: true
   probes:
     startupProbe:
       httpGet:
-        path: '/login'
+        path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
         port: http
       periodSeconds: 10
       timeoutSeconds: 5
       failureThreshold: 12
-      # initialDelaySeconds: 120
     livenessProbe:
       failureThreshold: 5
       httpGet:
-        path: '/login'
+        path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
         port: http
       periodSeconds: 10
       timeoutSeconds: 5
       # If Startup Probe is not supported on your Kubernetes cluster, you might want to use "initialDelaySeconds" instead.
       # It delays the initial liveness probe while Jenkins is starting
-      initialDelaySeconds: 60
+      # initialDelaySeconds: 60
     readinessProbe:
       failureThreshold: 3
       httpGet:
-        path: '/login'
+        path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
         port: http
       periodSeconds: 10
       timeoutSeconds: 5
       # If Startup Probe is not supported on your Kubernetes cluster, you might want to use "initialDelaySeconds" instead.
       # It delays the initial readyness probe while Jenkins is starting
-      initialDelaySeconds: 60
+      # initialDelaySeconds: 60
 
   # PodDisruptionBudget config
   podDisruptionBudget:
@@ -450,9 +449,10 @@ controller:
   updateStrategy: {}
 
   ingress:
-    enabled: false
+    enabled: true
     # Override for the default paths that map requests to the backend
-    paths: []
+    paths:
+      - /jenkins
     # - backend:
     #     serviceName: ssl-redirect
     #     servicePort: use-annotation
@@ -463,7 +463,7 @@ controller:
     #     servicePort: 8080
     # For Kubernetes v1.14+, use 'networking.k8s.io/v1beta1'
     # For Kubernetes v1.19+, use 'networking.k8s.io/v1'
-    apiVersion: "extensions/v1beta1"
+    apiVersion: "extensions/v1"
     labels: {}
     annotations:
       kubernetes.io/ingress.class: "nginx"
@@ -472,7 +472,6 @@ controller:
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
     # ingressClassName: nginx
     # Set this path to jenkinsUriPrefix above or use annotations to rewrite path
-    path: "/jenkins"
     # configures the hostname e.g. jenkins.example.com
     hostName:
     tls:
