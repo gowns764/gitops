@@ -471,7 +471,7 @@ controller:
             enabled: false
         internal:
             # -- Enables an additional internal load balancer (besides the external one).
-            enabled: true
+            enabled: false
             # -- Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
             annotations: {}
             # loadBalancerIP: ""
