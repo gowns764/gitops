@@ -122,7 +122,7 @@ controller:
   ## HorizontalPodAutoscaling (HPA)
   autoscaling:
     ## Enables HorizontalPodAutoscaling.
-    enabled: false
+    enabled: true
     ## The annotations of the Ingress Controller HorizontalPodAutoscaler.
     annotations: {}
     ## Minimum number of replicas for the HPA.
@@ -247,7 +247,7 @@ controller:
 
   ## Add a location based on the value of health-status-uri to the default server. The location responds with the 200 status code for any request.
   ## Useful for external health-checking of the Ingress Controller.
-  healthStatus: false
+  healthStatus: true
 
   ## Sets the URI of health status location in the default server. Requires controller.healthStatus.
   healthStatusURI: "/nginx-health"
