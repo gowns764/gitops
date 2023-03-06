@@ -592,7 +592,7 @@ controller:
                 allowPrivilegeEscalation: false
             resources: {}
         patch:
-            enabled: true
+            enabled: false
             image:
                 registry: registry.k8s.io
                 image: ingress-nginx/kube-webhook-certgen
