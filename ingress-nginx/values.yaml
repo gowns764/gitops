@@ -724,9 +724,8 @@ revisionHistoryLimit: 10
 ##
 defaultBackend:
     ##
-    enabled: true
+    enabled: false
     name: defaultbackend
-    namespace: default
     image:
         registry: registry.k8s.io
         image: defaultbackend-amd64
