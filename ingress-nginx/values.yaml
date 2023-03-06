@@ -725,7 +725,7 @@ revisionHistoryLimit: 10
 ##
 defaultBackend:
     ##
-    enabled: false
+    enabled: true
     name: defaultbackend
     image:
         registry: registry.k8s.io
