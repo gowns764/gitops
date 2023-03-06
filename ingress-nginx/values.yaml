@@ -74,7 +74,7 @@ controller:
     # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
     # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
     # is merged
-    hostNetwork: false
+    hostNetwork: true
     ## Use host ports 80 and 443
     ## Disabled by default
     hostPort:
@@ -420,9 +420,9 @@ controller:
         # -- List of IP addresses at which the controller services are available
         ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
         ##
-        externalIPs: []
+        externalIPs: 192.168.56.1
         # -- Used by cloud providers to connect the resulting `LoadBalancer` to a pre-existing static IP according to https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer
-        loadBalancerIP: 192.168.56.1
+        loadBalancerIP: ""
         loadBalancerSourceRanges: []
         enableHttp: true
         enableHttps: true
@@ -462,13 +462,13 @@ controller:
         ##   https: 32443
         ##   tcp:
         ##     8080: 32808
-        # nodePorts:
-        #     http: 30080
-        #     https: 30443
-        #     tcp: {}
-        #     udp: {}
+        nodePorts:
+            http: ""
+            https: ""
+            tcp: {}
+            udp: {}
         external:
-            enabled: false
+            enabled: true
         internal:
             # -- Enables an additional internal load balancer (besides the external one).
             enabled: false
@@ -724,7 +724,7 @@ revisionHistoryLimit: 10
 ##
 defaultBackend:
     ##
-    enabled: true
+    enabled: false
     name: defaultbackend
     image:
         registry: registry.k8s.io
