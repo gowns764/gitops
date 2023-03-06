@@ -74,12 +74,12 @@ controller:
     # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
     # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
     # is merged
-    hostNetwork: true
+    hostNetwork: false
     ## Use host ports 80 and 443
     ## Disabled by default
     hostPort:
         # -- Enable 'hostPort' or not
-        enabled: true
+        enabled: false
         ports:
             # -- 'hostPort' http port
             http: 80
@@ -421,7 +421,7 @@ controller:
         ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
         ##
         externalIPs:
-        - "192.168.20.2"
+        - "192.168.56.1"
         # -- Used by cloud providers to connect the resulting `LoadBalancer` to a pre-existing static IP according to https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer
         loadBalancerIP: ""
         loadBalancerSourceRanges: []
