@@ -547,7 +547,7 @@ controller:
         ## Additional annotations to the admission webhooks.
         ## These annotations will be added to the ValidatingWebhookConfiguration and
         ## the Jobs Spec of the admission webhooks.
-        enabled: false
+        enabled: true
         # -- Additional environment variables to set
         extraEnvs: []
         # extraEnvs:
@@ -568,7 +568,7 @@ controller:
         labels: {}
         # -- Use an existing PSP instead of creating one
         existingPsp: ""
-        networkPolicyEnabled: false
+        networkPolicyEnabled: true
         service:
             annotations: {}
             # clusterIP: ""
@@ -604,7 +604,7 @@ controller:
                 pullPolicy: IfNotPresent
             # -- Provide a priority class name to the webhook patching job
             ##
-            priorityClassName: ""
+            priorityClassName: "priority-class"
             podAnnotations: {}
             nodeSelector:
                 kubernetes.io/os: linux
@@ -617,7 +617,7 @@ controller:
                 fsGroup: 2000
         # Use certmanager to generate webhook certs
         certManager:
-            enabled: false
+            enabled: true
             # self-signed root certificate
             rootCert:
                 # default to be 5y
