@@ -568,7 +568,7 @@ controller:
         labels: {}
         # -- Use an existing PSP instead of creating one
         existingPsp: ""
-        networkPolicyEnabled: true
+        networkPolicyEnabled: 
         service:
             annotations: {}
             # clusterIP: ""
@@ -604,7 +604,7 @@ controller:
                 pullPolicy: IfNotPresent
             # -- Provide a priority class name to the webhook patching job
             ##
-            priorityClassName: "priority-class"
+            priorityClassName: ""
             podAnnotations: {}
             nodeSelector:
                 kubernetes.io/os: linux
