@@ -724,7 +724,7 @@ revisionHistoryLimit: 10
 ##
 defaultBackend:
     ##
-    enabled: false
+    enabled: true
     name: defaultbackend
     namespace: default
     image:
@@ -744,9 +744,9 @@ defaultBackend:
     existingPsp: ""
     extraArgs: {}
     serviceAccount:
-        create: false
-        name: ""
-        automountServiceAccountToken: false
+        create: true
+        name: "default-sa"
+        automountServiceAccountToken: true
     # -- Additional environment variables to set for defaultBackend pods
     extraEnvs: []
     port: 8080
