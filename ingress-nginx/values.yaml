@@ -546,7 +546,7 @@ controller:
         ## Additional annotations to the admission webhooks.
         ## These annotations will be added to the ValidatingWebhookConfiguration and
         ## the Jobs Spec of the admission webhooks.
-        enabled: true
+        enabled: false
         # -- Additional environment variables to set
         extraEnvs: []
         # extraEnvs:
@@ -591,7 +591,7 @@ controller:
                 allowPrivilegeEscalation: false
             resources: {}
         patch:
-            enabled: true
+            enabled: false
             image:
                 registry: registry.k8s.io
                 image: ingress-nginx/kube-webhook-certgen
@@ -611,7 +611,7 @@ controller:
             # -- Labels to be added to patch job resources
             labels: {}
             securityContext:
-                runAsNonRoot: true
+                runAsNonRoot: false
                 runAsUser: 2000
                 fsGroup: 2000
         # Use certmanager to generate webhook certs
@@ -726,6 +726,7 @@ defaultBackend:
     ##
     enabled: true
     name: defaultbackend
+    namespace: default
     image:
         registry: registry.k8s.io
         image: defaultbackend-amd64
@@ -743,9 +744,9 @@ defaultBackend:
     existingPsp: ""
     extraArgs: {}
     serviceAccount:
-        create: true
+        create: false
         name: ""
-        automountServiceAccountToken: true
+        automountServiceAccountToken: false
     # -- Additional environment variables to set for defaultBackend pods
     extraEnvs: []
     port: 8080
