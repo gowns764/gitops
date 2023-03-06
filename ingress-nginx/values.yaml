@@ -79,7 +79,7 @@ controller:
     ## Disabled by default
     hostPort:
         # -- Enable 'hostPort' or not
-        enabled: false
+        enabled: true
         ports:
             # -- 'hostPort' http port
             http: 80
@@ -450,19 +450,12 @@ controller:
         ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
         ipFamilies:
             - IPv4
-        # ports:
-        #     http: 80
-        #     https: 443
-        # targetPorts:
-        #     http: http
-        #     https: https
         ports:
-            - name: http
-              port: 80
-              targetPort: http
-            - name: https
-              port: 443
-              targetPort: https
+            http: 80
+            https: 443
+        targetPorts:
+            http: http
+            https: https
         type: LoadBalancer
         ## type: NodePort
         ## nodePorts:
