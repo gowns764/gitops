@@ -421,7 +421,7 @@ controller:
         ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
         ##
         externalIPs:
-        - "192.168.20.2"
+        - "192.168.56.1"
         # -- Used by cloud providers to connect the resulting `LoadBalancer` to a pre-existing static IP according to https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer
         loadBalancerIP: ""
         loadBalancerSourceRanges: []
@@ -456,7 +456,7 @@ controller:
         targetPorts:
             http: http
             https: https
-        type: ClusterIP
+        type: NodePort
         ## type: NodePort
         ## nodePorts:
         ##   http: 32080
@@ -464,9 +464,10 @@ controller:
         ##   tcp:
         ##     8080: 32808
         nodePorts:
-            http: ""
-            https: ""
-            tcp: {}
+            http: 32080
+            https: 32443
+            tcp:
+                8080: 32808
             udp: {}
         external:
             enabled: true
