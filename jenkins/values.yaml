@@ -654,8 +654,8 @@ agent:
       cpu: "512m"
       memory: "512Mi"
     limits:
-      cpu: "512m"
-      memory: "512Mi"
+      cpu: "1024m"
+      memory: "1024Mi"
   # You may want to change this to true while testing a new image
   alwaysPullImage: false
   # Controls how agent pods are retained after the Jenkins build completes
@@ -685,11 +685,6 @@ agent:
   - type: HostPath
     hostPath: /run/docker.sock
     mountPath: /run/docker.sock
-  - type: Nfs
-    mountPath: /mnt/nfs_shared/jenkins
-    readOnly: false
-    serverAddress: "192.168.56.1"
-    serverPath: /var/lib/containers
   # - type: PVC
   #   claimName: mypvc
   #   mountPath: /var/myapp/mypvc
@@ -739,7 +734,7 @@ agent:
   # jenkins-agent: v1
 
   # Executed command when side container gets started
-  command: "/bin/sh -c"
+  command: ""
   args: "${computer.jnlpmac} ${computer.name}"
   # Side container name
   sideContainerName: "jnlp"
