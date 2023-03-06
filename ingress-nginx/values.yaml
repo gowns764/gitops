@@ -420,11 +420,11 @@ controller:
         # -- List of IP addresses at which the controller services are available
         ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
         ##
-        externalIPs: []
+        externalIPs:
+        - "192.168.56.1"
         # -- Used by cloud providers to connect the resulting `LoadBalancer` to a pre-existing static IP according to https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer
-        loadBalancerIP: "192.168.56.1"
-        loadBalancerSourceRanges:
-        - 0.0.0.0/0
+        loadBalancerIP: ""
+        loadBalancerSourceRanges: []
         enableHttp: true
         enableHttps: true
         ## Set external traffic policy to: "Local" to preserve source IP on providers supporting it.
@@ -454,8 +454,8 @@ controller:
             http: 80
             https: 443
         targetPorts:
-            http: http
-            https: https
+            http: 80
+            https: 443
         type: LoadBalancer
         ## type: NodePort
         ## nodePorts:
